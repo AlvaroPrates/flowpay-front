@@ -1,8 +1,21 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
 import { Time } from '../../core/models/time.enum';
 
 @Component({
   selector: 'app-fila-indicator',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatChipsModule,
+    MatDividerModule
+  ],
   templateUrl: './fila-indicator.component.html',
   styleUrls: ['./fila-indicator.component.scss']
 })

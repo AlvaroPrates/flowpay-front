@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import * as SockJS from 'sockjs-client';
+import SockJS from 'sockjs-client';
 import { Client, IMessage } from '@stomp/stompjs';
 import { environment } from '../../../environments/environment';
 import { WebSocketMessage } from '../models/websocket-message.model';

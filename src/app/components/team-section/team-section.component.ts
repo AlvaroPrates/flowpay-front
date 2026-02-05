@@ -1,8 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Time, TimeLabels } from '../../core/models/time.enum';
 import { Atendente } from '../../core/models/atendente.model';
 import { AtendenteService } from '../../core/services/atendente.service';
 import { DashboardService } from '../../core/services/dashboard.service';
+import { FilaIndicatorComponent } from '../fila-indicator/fila-indicator.component';
+import { AtendenteCardComponent } from '../atendente-card/atendente-card.component';
 
 interface TimeStatus {
   time: Time;
@@ -13,6 +20,16 @@ interface TimeStatus {
 
 @Component({
   selector: 'app-team-section',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    FilaIndicatorComponent,
+    AtendenteCardComponent
+  ],
   templateUrl: './team-section.component.html',
   styleUrls: ['./team-section.component.scss']
 })

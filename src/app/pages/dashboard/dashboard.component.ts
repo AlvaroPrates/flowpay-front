@@ -1,14 +1,35 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabGroup } from '@angular/material/tabs';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { WebsocketService } from '../../core/services/websocket.service';
 import { DashboardMetricas } from '../../core/models/metricas.model';
 import { Time } from '../../core/models/time.enum';
 import { WebSocketMessage, TipoMensagemWebSocket } from '../../core/models/websocket-message.model';
-import { MatTabGroup } from '@angular/material/tabs';
+import { HeaderComponent } from '../../components/header/header.component';
+import { MetricsPanelComponent } from '../../components/metrics-panel/metrics-panel.component';
+import { TeamSectionComponent } from '../../components/team-section/team-section.component';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTabsModule,
+    MatCardModule,
+    MatIconModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    HeaderComponent,
+    MetricsPanelComponent,
+    TeamSectionComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
