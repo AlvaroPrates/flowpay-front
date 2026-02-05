@@ -1,0 +1,43 @@
+<mat-card class="fila-indicator" [class]="getSeverityClass()">
+  <div class="fila-header">
+    <div class="fila-info">
+      <mat-icon class="fila-icon">{{ getFilaIcon() }}</mat-icon>
+      <div class="fila-details">
+        <div class="fila-label">Fila de Espera</div>
+        <div class="fila-message">{{ getFilaMessage() }}</div>
+      </div>
+    </div>
+
+    <mat-chip class="fila-badge" [class]="getSeverityClass()">
+      {{ tamanhoFila }}
+    </mat-chip>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="fila-stats">
+    <div class="stat-item">
+      <mat-icon>schedule</mat-icon>
+      <span class="stat-label">Na fila:</span>
+      <span class="stat-value">{{ tamanhoFila }}</span>
+    </div>
+
+    <div class="stat-item">
+      <mat-icon>phone_in_talk</mat-icon>
+      <span class="stat-label">Em atendimento:</span>
+      <span class="stat-value">{{ atendimentosAtivos }}</span>
+    </div>
+  </div>
+
+  <div class="fila-visual" *ngIf="tamanhoFila > 0">
+    <div
+      *ngFor="let item of [].constructor(Math.min(tamanhoFila, 10)); let i = index"
+      class="fila-item"
+      [style.animation-delay.ms]="i * 100">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div *ngIf="tamanhoFila > 10" class="fila-more">
+      +{{ tamanhoFila - 10 }}
+    </div>
+  </div>
+</mat-card>

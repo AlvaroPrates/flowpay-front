@@ -1,0 +1,55 @@
+<div class="team-section">
+  <div class="team-header">
+    <h2 class="team-title">{{ timeLabel }}</h2>
+    <button mat-icon-button (click)="carregarDados()" matTooltip="Atualizar">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <mat-card>
+      <div class="skeleton-loader"></div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!loading && timeStatus" class="team-content">
+    <!-- Indicador de Fila -->
+    <app-fila-indicator
+      [time]="time"
+      [tamanhoFila]="timeStatus.tamanhoFila"
+      [atendimentosAtivos]="timeStatus.atendimentosAtivos">
+    </app-fila-indicator>
+
+    <!-- Lista de Atendentes -->
+    <div class="atendentes-section">
+      <h3 class="section-subtitle">
+        <mat-icon>people</mat-icon>
+        Atendentes ({{ timeStatus.atendentes.length }})
+      </h3>
+
+      <div class="atendentes-grid" *ngIf="timeStatus.atendentes.length > 0">
+        <app-atendente-card
+          *ngFor="let atendente of timeStatus.atendentes"
+          [atendente]="atendente">
+        </app-atendente-card>
+      </div>
+
+      <mat-card class="empty-state" *ngIf="timeStatus.atendentes.length === 0">
+        <mat-icon>person_off</mat-icon>
+        <p>Nenhum atendente cadastrado neste time</p>
+        <small>Cadastre atendentes usando o botão no cabeçalho</small>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !timeStatus" class="error-state">
+    <mat-card>
+      <mat-icon>error_outline</mat-icon>
+      <p>Erro ao carregar dados do time</p>
+      <button mat-raised-button color="primary" (click)="carregarDados()">
+        <mat-icon>refresh</mat-icon>
+        Tentar novamente
+      </button>
+    </mat-card>
+  </div>
+</div>

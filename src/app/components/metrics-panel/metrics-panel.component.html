@@ -1,0 +1,45 @@
+<div class="metrics-container" *ngIf="metricas">
+  <mat-card class="metric-card active">
+    <div class="metric-icon">
+      <mat-icon>phone_in_talk</mat-icon>
+    </div>
+    <div class="metric-content">
+      <div class="metric-value">{{ metricas.totalAtendimentosAtivos }}</div>
+      <div class="metric-label">Em Atendimento</div>
+    </div>
+  </mat-card>
+
+  <mat-card class="metric-card queue">
+    <div class="metric-icon">
+      <mat-icon>schedule</mat-icon>
+    </div>
+    <div class="metric-content">
+      <div class="metric-value">{{ metricas.totalNaFila }}</div>
+      <div class="metric-label">Na Fila</div>
+    </div>
+  </mat-card>
+
+  <mat-card class="metric-card operators">
+    <div class="metric-icon">
+      <mat-icon>people</mat-icon>
+    </div>
+    <div class="metric-content">
+      <div class="metric-value">
+        {{ metricas.atendentesDisponiveis }}/{{ metricas.totalAtendentes }}
+      </div>
+      <div class="metric-label">Atendentes Disponíveis</div>
+    </div>
+  </mat-card>
+</div>
+
+<div class="loading-state" *ngIf="!metricas">
+  <mat-card class="metric-card skeleton">
+    <div class="skeleton-content"></div>
+  </mat-card>
+  <mat-card class="metric-card skeleton">
+    <div class="skeleton-content"></div>
+  </mat-card>
+  <mat-card class="metric-card skeleton">
+    <div class="skeleton-content"></div>
+  </mat-card>
+</div>

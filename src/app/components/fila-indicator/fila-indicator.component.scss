@@ -1,0 +1,178 @@
+.fila-indicator {
+  margin-bottom: 16px;
+
+  &.success {
+    border-left: 4px solid #4CAF50;
+  }
+
+  &.warning {
+    border-left: 4px solid #FF9800;
+  }
+
+  &.danger {
+    border-left: 4px solid #F44336;
+  }
+}
+
+.fila-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.fila-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fila-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+
+  .success & {
+    color: #4CAF50;
+  }
+
+  .warning & {
+    color: #FF9800;
+  }
+
+  .danger & {
+    color: #F44336;
+  }
+}
+
+.fila-details {
+  flex: 1;
+}
+
+.fila-label {
+  font-size: 13px;
+  color: rgba(0,0,0,0.6);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.fila-message {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.fila-badge {
+  font-size: 20px;
+  font-weight: 600;
+  min-height: 36px;
+  height: 36px;
+  padding: 0 12px;
+
+  &.success {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+  }
+
+  &.warning {
+    background-color: #FFF3E0;
+    color: #E65100;
+  }
+
+  &.danger {
+    background-color: #FFEBEE;
+    color: #C62828;
+  }
+}
+
+mat-divider {
+  margin: 12px 0;
+}
+
+.fila-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: rgba(0,0,0,0.54);
+  }
+
+  .stat-label {
+    color: rgba(0,0,0,0.6);
+  }
+
+  .stat-value {
+    font-weight: 600;
+  }
+}
+
+.fila-visual {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+  }
+}
+
+.fila-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  animation: fadeInScale 0.3s ease-out;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #2196F3;
+  }
+}
+
+.fila-more {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.6);
+  padding: 0 8px;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Adicionar propriedade Math ao componente
+:host {
+  display: block;
+}

@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <mat-icon class="logo-icon">account_balance</mat-icon>
+      <span class="title">FlowPay</span>
+      <span class="subtitle">Central de Atendimento</span>
+    </div>
+
+    <div class="header-right">
+      <button mat-raised-button color="accent" (click)="abrirDialogNovoAtendimento()">
+        <mat-icon>add</mat-icon>
+        Novo Atendimento
+      </button>
+
+      <button mat-raised-button (click)="abrirDialogNovoAtendente()">
+        <mat-icon>person_add</mat-icon>
+        Cadastrar Atendente
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

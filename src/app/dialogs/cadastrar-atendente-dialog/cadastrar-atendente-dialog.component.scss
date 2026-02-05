@@ -1,0 +1,86 @@
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+
+  mat-icon {
+    color: #4CAF50;
+  }
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  padding: 20px 24px;
+}
+
+.atendente-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.time-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: rgba(0,0,0,0.54);
+  }
+}
+
+.info-card {
+  background-color: #E3F2FD;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+
+  mat-icon {
+    color: #2196F3;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+  }
+
+  .info-text {
+    flex: 1;
+    font-size: 13px;
+    color: rgba(0,0,0,0.87);
+
+    strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  gap: 12px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  mat-dialog-content {
+    min-width: auto;
+    width: 100%;
+  }
+}

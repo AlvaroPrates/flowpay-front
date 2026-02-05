@@ -1,0 +1,39 @@
+<mat-card class="atendente-card" [class]="getStatusClass()">
+  <div class="atendente-header">
+    <div class="atendente-info">
+      <mat-icon class="avatar-icon">person</mat-icon>
+      <div class="atendente-details">
+        <div class="atendente-nome">{{ atendente.nome }}</div>
+        <mat-chip class="status-chip" [class]="getStatusClass()">
+          {{ getStatusLabel() }}
+        </mat-chip>
+      </div>
+    </div>
+
+    <div class="atendente-counter">
+      <span class="counter-value">{{ atendente.atendimentosAtivos }}</span>
+      <span class="counter-max">/3</span>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="slots-container">
+    <div class="slot-label">Capacidade:</div>
+    <div class="slots">
+      <div
+        *ngFor="let filled of getSlots(); let i = index"
+        class="slot"
+        [class.filled]="filled"
+        [matTooltip]="filled ? 'Slot ocupado' : 'Slot disponível'">
+        <mat-icon>{{ filled ? 'circle' : 'radio_button_unchecked' }}</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <mat-progress-bar
+    mode="determinate"
+    [value]="(atendente.atendimentosAtivos / 3) * 100"
+    [class]="getStatusClass()">
+  </mat-progress-bar>
+</mat-card>

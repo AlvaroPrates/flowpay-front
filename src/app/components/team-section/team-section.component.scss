@@ -1,0 +1,121 @@
+.team-section {
+  margin-bottom: 24px;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.team-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0;
+  color: rgba(0,0,0,0.87);
+}
+
+.team-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 12px 0;
+  color: rgba(0,0,0,0.6);
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.atendentes-section {
+  margin-top: 8px;
+}
+
+.atendentes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fafafa;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: rgba(0,0,0,0.26);
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    color: rgba(0,0,0,0.6);
+    margin: 0 0 8px 0;
+  }
+
+  small {
+    font-size: 13px;
+    color: rgba(0,0,0,0.38);
+  }
+}
+
+.loading-state {
+  mat-card {
+    padding: 40px;
+  }
+}
+
+.skeleton-loader {
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.error-state {
+  mat-card {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff3e0;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #f57c00;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 16px;
+      color: rgba(0,0,0,0.87);
+      margin: 0 0 16px 0;
+    }
+  }
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+  .atendentes-grid {
+    grid-template-columns: 1fr;
+  }
+}
