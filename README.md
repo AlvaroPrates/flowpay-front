@@ -4,6 +4,8 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 Dashboard para o sistema de gerenciamento e distribuição automática de atendimentos FlowPay.
 
+![preview](https://github.com/AlvaroPrates/flowpay-front/blob/main/dashboard-preview.png?raw=true)
+
 ## Development server
 
 To start a local development server, run:
