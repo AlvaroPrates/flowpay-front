@@ -1,68 +1,67 @@
-<h2 mat-dialog-title>
-  <mat-icon>person_add</mat-icon>
-  Cadastrar Atendente
-</h2>
+<div class="dialog-surface">
+  <h2 mat-dialog-title>
+    <mat-icon>person_add</mat-icon>
+    Cadastrar Atendente
+  </h2>
 
-<mat-dialog-content>
-  <form [formGroup]="form" class="atendente-form">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Nome Completo</mat-label>
-      <input
-        matInput
-        formControlName="nome"
-        placeholder="Ex: Ana Silva"
-        autocomplete="off">
-      <mat-icon matPrefix>badge</mat-icon>
-      <mat-error *ngIf="form.get('nome')?.hasError('required')">
-        Nome é obrigatório
-      </mat-error>
-      <mat-error *ngIf="form.get('nome')?.hasError('minlength')">
-        Nome deve ter no mínimo 3 caracteres
-      </mat-error>
-    </mat-form-field>
+  <mat-dialog-content>
+    <form [formGroup]="form" class="atendente-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput formControlName="nome" placeholder="Ex: Ana Silva" autocomplete="off">
+        <mat-icon matPrefix>badge</mat-icon>
+        @if (form.get('nome')?.hasError('required')) {
+          <mat-error>
+            Nome é obrigatório
+          </mat-error>
+        }
+        @if (form.get('nome')?.hasError('minlength')) {
+          <mat-error>
+            Nome deve ter no mínimo 3 caracteres
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Time</mat-label>
-      <mat-select formControlName="time" placeholder="Selecione o time">
-        <mat-option *ngFor="let time of times" [value]="time">
-          <div class="time-option">
-            <mat-icon>group</mat-icon>
-            {{ timeLabels[time] }}
-          </div>
-        </mat-option>
-      </mat-select>
-      <mat-icon matPrefix>groups</mat-icon>
-      <mat-hint>Time ao qual o atendente será vinculado</mat-hint>
-      <mat-error *ngIf="form.get('time')?.hasError('required')">
-        Time é obrigatório
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Time</mat-label>
+        <mat-select formControlName="time" placeholder="Selecione o time">
+          @if (form.get('time')?.value) {
+            <mat-select-trigger>
+              {{ getTimeLabel(form.get('time')?.value) }}
+            </mat-select-trigger>
+          }
+          @for (time of times; track time) {
+            <mat-option [value]="time">
+              <div class="time-option">
+                <mat-icon>group</mat-icon>
+                {{ timeLabels[time] }}
+              </div>
+            </mat-option>
+          }
+        </mat-select>
+        <mat-icon matPrefix>groups</mat-icon>
+        @if (form.get('time')?.hasError('required')) {
+          <mat-error>
+            Time é obrigatório
+          </mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
 
-    <mat-card class="info-card">
-      <mat-icon>info</mat-icon>
-      <div class="info-text">
-        <strong>Limite de Atendimentos:</strong>
-        Cada atendente pode atender até 3 pessoas simultaneamente.
-      </div>
-    </mat-card>
-  </form>
-</mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()" [disabled]="loading">
+      Cancelar
+    </button>
 
-<mat-dialog-actions align="end">
-  <button
-    mat-button
-    (click)="onCancel()"
-    [disabled]="loading">
-    Cancelar
-  </button>
-
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onSubmit()"
-    [disabled]="loading || form.invalid">
-    <mat-icon *ngIf="!loading">person_add</mat-icon>
-    <mat-icon *ngIf="loading" class="spinner">hourglass_empty</mat-icon>
-    {{ loading ? 'Cadastrando...' : 'Cadastrar' }}
-  </button>
-</mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="loading || form.invalid">
+      @if (!loading) {
+        <mat-icon>person_add</mat-icon>
+      }
+      @if (loading) {
+        <mat-icon class="spinner">hourglass_empty</mat-icon>
+      }
+      {{ loading ? 'Cadastrando...' : 'Cadastrar' }}
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,74 +1,77 @@
-<h2 mat-dialog-title>
-  <mat-icon>add_circle</mat-icon>
-  Novo Atendimento
-</h2>
+<div class="dialog-surface">
+  <h2 mat-dialog-title>
+    <mat-icon>add_circle</mat-icon>
+    Novo Atendimento
+  </h2>
 
-<mat-dialog-content>
-  <form [formGroup]="form" class="atendimento-form">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Nome do Cliente</mat-label>
-      <input
-        matInput
-        formControlName="nomeCliente"
-        placeholder="Ex: João Silva"
-        autocomplete="off">
-      <mat-icon matPrefix>person</mat-icon>
-      <mat-error *ngIf="form.get('nomeCliente')?.hasError('required')">
-        Nome é obrigatório
-      </mat-error>
-      <mat-error *ngIf="form.get('nomeCliente')?.hasError('minlength')">
-        Nome deve ter no mínimo 3 caracteres
-      </mat-error>
-    </mat-form-field>
+  <mat-dialog-content>
+    <form [formGroup]="form" class="atendimento-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome do Cliente</mat-label>
+        <input matInput formControlName="nomeCliente" placeholder="Ex: João Silva" autocomplete="off">
+        <mat-icon matPrefix>person</mat-icon>
+        @if (form.get('nomeCliente')?.hasError('required')) {
+          <mat-error>
+            Nome é obrigatório
+          </mat-error>
+        }
+        @if (form.get('nomeCliente')?.hasError('minlength')) {
+          <mat-error>
+            Nome deve ter no mínimo 3 caracteres
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Assunto</mat-label>
-      <textarea
-        matInput
-        formControlName="assunto"
-        placeholder="Descreva o motivo do atendimento"
-        rows="3"
-        autocomplete="off">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Assunto</mat-label>
+        <textarea matInput formControlName="assunto" placeholder="Descreva o motivo do atendimento" rows="3"
+          autocomplete="off">
       </textarea>
-      <mat-icon matPrefix>description</mat-icon>
-      <mat-error *ngIf="form.get('assunto')?.hasError('required')">
-        Assunto é obrigatório
-      </mat-error>
-      <mat-error *ngIf="form.get('assunto')?.hasError('minlength')">
-        Assunto deve ter no mínimo 5 caracteres
-      </mat-error>
-    </mat-form-field>
+        <mat-icon matPrefix>description</mat-icon>
+        @if (form.get('assunto')?.hasError('required')) {
+          <mat-error>
+            Assunto é obrigatório
+          </mat-error>
+        }
+        @if (form.get('assunto')?.hasError('minlength')) {
+          <mat-error>
+            Assunto deve ter no mínimo 5 caracteres
+          </mat-error>
+        }
+      </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Time Responsável</mat-label>
-      <mat-select formControlName="time" placeholder="Selecione o time">
-        <mat-option *ngFor="let time of times" [value]="time">
-          {{ timeLabels[time] }}
-        </mat-option>
-      </mat-select>
-      <mat-icon matPrefix>group</mat-icon>
-      <mat-error *ngIf="form.get('time')?.hasError('required')">
-        Time é obrigatório
-      </mat-error>
-    </mat-form-field>
-  </form>
-</mat-dialog-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Time Responsável</mat-label>
+        <mat-select formControlName="time" placeholder="Selecione o time">
+          @for (time of times; track time) {
+            <mat-option [value]="time">
+              {{ timeLabels[time] }}
+            </mat-option>
+          }
+        </mat-select>
+        <mat-icon matPrefix>group</mat-icon>
+        @if (form.get('time')?.hasError('required')) {
+          <mat-error>
+            Time é obrigatório
+          </mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button
-    mat-button
-    (click)="onCancel()"
-    [disabled]="loading">
-    Cancelar
-  </button>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()" [disabled]="loading">
+      Cancelar
+    </button>
 
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onSubmit()"
-    [disabled]="loading || form.invalid">
-    <mat-icon *ngIf="!loading">save</mat-icon>
-    <mat-icon *ngIf="loading" class="spinner">hourglass_empty</mat-icon>
-    {{ loading ? 'Criando...' : 'Criar Atendimento' }}
-  </button>
-</mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="loading || form.invalid">
+      @if (!loading) {
+        <mat-icon>save</mat-icon>
+      }
+      @if (loading) {
+        <mat-icon class="spinner">hourglass_empty</mat-icon>
+      }
+      {{ loading ? 'Criando...' : 'Criar Atendimento' }}
+    </button>
+  </mat-dialog-actions>
+</div>

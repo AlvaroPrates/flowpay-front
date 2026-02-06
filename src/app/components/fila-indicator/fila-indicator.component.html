@@ -29,15 +29,20 @@
     </div>
   </div>
 
-  <div class="fila-visual" *ngIf="tamanhoFila > 0">
-    <div
-      *ngFor="let item of [].constructor(Math.min(tamanhoFila, 10)); let i = index"
-      class="fila-item"
-      [style.animation-delay.ms]="i * 100">
-      <mat-icon>person</mat-icon>
+  @if (tamanhoFila > 0) {
+    <div class="fila-visual">
+      @for (item of [].constructor(Math.min(tamanhoFila, 10)); track $index) {
+        <div
+          class="fila-item"
+          [style.animation-delay.ms]="$index * 100">
+          <mat-icon>person</mat-icon>
+        </div>
+      }
+      @if (tamanhoFila > 10) {
+        <div class="fila-more">
+          +{{ tamanhoFila - 10 }}
+        </div>
+      }
     </div>
-    <div *ngIf="tamanhoFila > 10" class="fila-more">
-      +{{ tamanhoFila - 10 }}
-    </div>
-  </div>
+  }
 </mat-card>

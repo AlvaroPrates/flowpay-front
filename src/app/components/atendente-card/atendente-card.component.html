@@ -21,13 +21,14 @@
   <div class="slots-container">
     <div class="slot-label">Capacidade:</div>
     <div class="slots">
-      <div
-        *ngFor="let filled of getSlots(); let i = index"
-        class="slot"
-        [class.filled]="filled"
-        [matTooltip]="filled ? 'Slot ocupado' : 'Slot disponível'">
-        <mat-icon>{{ filled ? 'circle' : 'radio_button_unchecked' }}</mat-icon>
-      </div>
+      @for (filled of getSlots(); track $index) {
+        <div
+          class="slot"
+          [class.filled]="filled"
+          [matTooltip]="filled ? 'Slot ocupado' : 'Slot disponível'">
+          <mat-icon>{{ filled ? 'circle' : 'radio_button_unchecked' }}</mat-icon>
+        </div>
+      }
     </div>
   </div>
 

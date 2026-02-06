@@ -80,4 +80,8 @@ export class CadastrarAtendenteDialogComponent {
   onCancel(): void {
     this.dialogRef.close(false);
   }
+
+  getTimeLabel(time: Time): string {
+    return this.timeLabels[time] || '';
+  }
 }

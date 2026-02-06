@@ -53,6 +53,11 @@
   padding: 40px 20px;
   background-color: #fafafa;
 
+  &.mat-mdc-card {
+    justify-content: center;
+    align-items: center;
+  }
+
   mat-icon {
     font-size: 64px;
     width: 64px;

@@ -126,7 +126,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
       case TipoMensagemWebSocket.METRICAS_ATUALIZADAS:
         console.log('📈 Métricas atualizadas');
-        this.metricas = message.dados;
+        this.carregarMetricas();
+        break;
+
+      case TipoMensagemWebSocket.NOVO_ATENDENTE:
+        console.log('👤 Novo atendente cadastrado:', message.dados);
+        this.carregarMetricas();
         break;
 
       default:

@@ -107,10 +107,6 @@ body {
 /* Cards com hover */
 mat-card {
   transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
 }
 
 /* Spinners */

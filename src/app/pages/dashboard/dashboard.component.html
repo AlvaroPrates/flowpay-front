@@ -34,24 +34,27 @@
           class="teams-tabs"
           [selectedIndex]="0">
 
-          <mat-tab *ngFor="let time of times">
-            <ng-template mat-tab-label>
-              <div class="tab-label">
-                <mat-icon>group</mat-icon>
-                <span>{{ getTimeLabel(time) }}</span>
-                <mat-chip
-                  *ngIf="metricas"
-                  class="tab-badge"
-                  [class.has-queue]="metricas.filasPorTime[time] > 0">
-                  {{ metricas.filasPorTime[time] || 0 }}
-                </mat-chip>
-              </div>
-            </ng-template>
+          @for (time of times; track time) {
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <div class="tab-label">
+                  <mat-icon>group</mat-icon>
+                  <span>{{ getTimeLabel(time) }}</span>
+                  @if (metricas) {
+                    <mat-chip
+                      class="tab-badge"
+                      [class.has-queue]="metricas.filasPorTime[time] > 0">
+                      {{ metricas.filasPorTime[time] || 0 }}
+                    </mat-chip>
+                  }
+                </div>
+              </ng-template>
 
-            <div class="tab-content">
-              <app-team-section [time]="time"></app-team-section>
-            </div>
-          </mat-tab>
+              <div class="tab-content">
+                <app-team-section [time]="time"></app-team-section>
+              </div>
+            </mat-tab>
+          }
         </mat-tab-group>
       </mat-card>
 
@@ -59,8 +62,10 @@
   </div>
 
   <!-- Loading Overlay -->
-  <div class="loading-overlay" *ngIf="loading">
-    <mat-spinner diameter="60"></mat-spinner>
-    <p>Carregando dashboard...</p>
-  </div>
+  @if (loading) {
+    <div class="loading-overlay">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p>Carregando dashboard...</p>
+    </div>
+  }
 </div>

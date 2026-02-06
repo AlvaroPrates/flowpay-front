@@ -58,6 +58,11 @@ export class WebsocketService {
       this.handleMessage(message);
     });
 
+    // Atendentes
+    this.client.subscribe('/topic/atendentes', (message: IMessage) => {
+      this.handleMessage(message);
+    });
+
     console.log('📡 Inscrito nos tópicos WebSocket');
   }
 
