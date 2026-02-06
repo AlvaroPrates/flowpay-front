@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -33,7 +33,7 @@ import { TeamSectionComponent } from '../../components/team-section/team-section
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
   metricas: DashboardMetricas | null = null;
@@ -45,12 +45,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    private websocketService: WebsocketService
+    private websocketService: WebsocketService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.carregarMetricas();
     this.conectarWebSocket();
+  }
+
+  ngAfterViewInit(): void {
+    this.carregarMetricas();
   }
 
   ngOnDestroy(): void {
@@ -61,6 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   carregarMetricas(): void {
     this.loading = true;
+    this.cdr.detectChanges();
 
     this.dashboardService.obterMetricas()
       .pipe(takeUntil(this.destroy$))
@@ -68,11 +73,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         next: (metricas) => {
           this.metricas = metricas;
           this.loading = false;
+          this.cdr.detectChanges();
           console.log('✅ Métricas carregadas:', metricas);
         },
         error: (error) => {
           console.error('❌ Erro ao carregar métricas:', error);
           this.loading = false;
+          this.cdr.detectChanges();
         }
       });
   }

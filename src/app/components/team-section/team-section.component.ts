@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,7 +33,7 @@ interface TimeStatus {
   templateUrl: './team-section.component.html',
   styleUrls: ['./team-section.component.scss']
 })
-export class TeamSectionComponent implements OnInit {
+export class TeamSectionComponent implements OnInit, AfterViewInit {
   @Input() time!: Time;
 
   timeStatus: TimeStatus | null = null;
@@ -42,16 +42,21 @@ export class TeamSectionComponent implements OnInit {
 
   constructor(
     private atendenteService: AtendenteService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.timeLabel = TimeLabels[this.time];
+  }
+
+  ngAfterViewInit(): void {
     this.carregarDados();
   }
 
   carregarDados(): void {
     this.loading = true;
+    this.cdr.detectChanges();
 
     this.dashboardService.obterStatusTime(this.time).subscribe({
       next: (status) => {
@@ -62,10 +67,12 @@ export class TeamSectionComponent implements OnInit {
           atendentes: status.atendentes
         };
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Erro ao carregar status do time:', error);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
